@@ -1,3 +1,3 @@
-var Gameboy = require('./src/main.js');
+var GameboyJS = require('./src/main.js');
 
-export default Gameboy;
+export default GameboyJS;
