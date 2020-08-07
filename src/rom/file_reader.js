@@ -5,7 +5,7 @@ module.exports = function (GameboyJS) {
   //
   // Expects to be provided a file input element,
   // or will try to find one with the "file" DOM ID
-  var RomFileReader = function(el) {
+  var RomFileReader = function(el, file) {
     this.domElement = el || document.getElementById('file');
     if (!this.domElement) {
       throw 'The RomFileReader needs a valid input element.';
@@ -15,6 +15,10 @@ module.exports = function (GameboyJS) {
     this.domElement.addEventListener('change', function(e){
       self.loadFromFile(e.target.files[0]);
     });
+
+    if (file) {
+      self.loadFromFile(file);
+    }
   };
 
   // The callback argument will be called when a file is successfully
