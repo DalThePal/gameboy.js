@@ -31,10 +31,10 @@ GameboyJS.cpuOps      = cpuOps(GameboyJS);
 let opcodemaps        = opcodes(GameboyJS);
 
 GameboyJS.opcodeCbmap = opcodemaps.opcodeCbmap;
-GameboyJS.opcodemap   = opcodemaps.opcodeMap;
+GameboyJS.opcodeMap   = opcodemaps.opcodeMap;
 GameboyJS.CPU         = CPU(GameboyJS);
 GameboyJS.Memory      = Memory(GameboyJS);
-GameboyJS.Exception   = Exception(GameboyJS);
+GameboyJS.UnimplementedException   = Exception(GameboyJS);
 GameboyJS.ext_ram     = ext_ram(GameboyJS);
 GameboyJS.Timer       = Timer(GameboyJS);
 GameboyJS.MBC         = MBC(GameboyJS);
