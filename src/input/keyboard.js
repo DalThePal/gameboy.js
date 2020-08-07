@@ -44,15 +44,19 @@ module.exports = function (GameboyJS) {
   Keyboard.prototype.translateKey = function(keycode) {
     var key = null;
     switch (keycode) {
+      case 'A':
       case 71: // G
         key = 'A';
         break;
+      case 'B':
       case 66: // B
         key = 'B';
         break;
+      case 'start':
       case 72: // H
         key = 'START';
         break;
+      case 'select':
       case 78: // N
         key = 'SELECT';
         break;
