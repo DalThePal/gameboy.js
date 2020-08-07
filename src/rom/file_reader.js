@@ -17,7 +17,7 @@ module.exports = function (GameboyJS) {
     });
 
     console.log(el)
-    console.log(file)
+    
     if (file) {
       self.loadFromFile(file);
     }
@@ -31,6 +31,7 @@ module.exports = function (GameboyJS) {
 
   // Automatically called when the DOM input is provided with a file
   RomFileReader.prototype.loadFromFile = function(file) {
+    console.log(file)
     if (file === undefined) {
       return;
     }
