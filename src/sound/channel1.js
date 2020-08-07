@@ -1,7 +1,6 @@
-var GameboyJS;
-(function (GameboyJS) {
-"use strict";
-var Channel1 = function(apu, channelNumber, audioContext) {
+module.exports = function (GameboyJS) {
+  "use strict";
+  var Channel1 = function(apu, channelNumber, audioContext) {
     this.apu = apu;
     this.channelNumber = channelNumber;
     this.playing = false;
@@ -38,9 +37,9 @@ var Channel1 = function(apu, channelNumber, audioContext) {
     this.audioContext = audioContext;
     this.gainNode = gainNode;
     this.oscillator = oscillator;
-};
+  };
 
-Channel1.prototype.play = function() {
+  Channel1.prototype.play = function() {
     if (this.playing) return;
     this.playing = true;
     this.apu.setSoundFlag(this.channelNumber, 1);
@@ -49,81 +48,81 @@ Channel1.prototype.play = function() {
     this.clockEnvelop = 0;
     this.clockSweep = 0;
     if (this.sweepShifts > 0) this.checkFreqSweep();
-};
-Channel1.prototype.stop = function() {
+  };
+  Channel1.prototype.stop = function() {
     this.playing = false;
     this.apu.setSoundFlag(this.channelNumber, 0);
     this.gainNode.disconnect();
-};
-Channel1.prototype.checkFreqSweep = function() {
+  };
+  Channel1.prototype.checkFreqSweep = function() {
     var oldFreq = this.getFrequency();
     var newFreq = oldFreq + this.sweepSign * (oldFreq >> this.sweepShifts);
     if (newFreq > 0x7FF) {
-        newFreq = 0;
-        this.stop();
+      newFreq = 0;
+      this.stop();
     }
 
     return newFreq;
-};
-Channel1.prototype.update = function(clockElapsed) {
+  };
+  Channel1.prototype.update = function(clockElapsed) {
     this.clockEnvelop += clockElapsed;
     this.clockSweep   += clockElapsed;
 
     if ((this.sweepCount || this.sweepTime) && this.clockSweep > (this.sweepStepLength * this.sweepTime)) {
-        this.clockSweep -= (this.sweepStepLength * this.sweepTime);
-        this.sweepCount--;
+      this.clockSweep -= (this.sweepStepLength * this.sweepTime);
+      this.sweepCount--;
 
-        var newFreq = this.checkFreqSweep(); // process and check new freq
+      var newFreq = this.checkFreqSweep(); // process and check new freq
 
-        this.apu.memory[0xFF13] = newFreq & 0xFF;
-        this.apu.memory[0xFF14] &= 0xF8;
-        this.apu.memory[0xFF14] |= (newFreq & 0x700) >> 8;
-        this.setFrequency(newFreq);
+      this.apu.memory[0xFF13] = newFreq & 0xFF;
+      this.apu.memory[0xFF14] &= 0xF8;
+      this.apu.memory[0xFF14] |= (newFreq & 0x700) >> 8;
+      this.setFrequency(newFreq);
 
-        this.checkFreqSweep(); // check again with new value
+      this.checkFreqSweep(); // check again with new value
     }
 
     if (this.envelopeCheck && this.clockEnvelop > this.envelopeStepLength) {
-        this.clockEnvelop -= this.envelopeStepLength;
-        this.envelopeStep--;
-        this.setEnvelopeVolume(this.envelopeVolume + this.envelopeSign);
-        if (this.envelopeStep <= 0) {
-            this.envelopeCheck = false;
-        }
+      this.clockEnvelop -= this.envelopeStepLength;
+      this.envelopeStep--;
+      this.setEnvelopeVolume(this.envelopeVolume + this.envelopeSign);
+      if (this.envelopeStep <= 0) {
+        this.envelopeCheck = false;
+      }
     }
 
     if (this.lengthCheck) {
-        this.clockLength += clockElapsed;
-        if (this.clockLength > this.soundLengthUnit) {
-            this.soundLength--;
-            this.clockLength -= this.soundLengthUnit;
-            if (this.soundLength == 0) {
-                this.setLength(0);
-                this.stop();
-            }
+      this.clockLength += clockElapsed;
+      if (this.clockLength > this.soundLengthUnit) {
+        this.soundLength--;
+        this.clockLength -= this.soundLengthUnit;
+        if (this.soundLength == 0) {
+          this.setLength(0);
+          this.stop();
         }
+      }
     }
-};
-Channel1.prototype.setFrequency = function(value) {
+  };
+  Channel1.prototype.setFrequency = function(value) {
     this.frequency = value;
     this.oscillator.frequency.value = 131072 / (2048 - this.frequency);
-};
-Channel1.prototype.getFrequency = function() {
+  };
+  Channel1.prototype.getFrequency = function() {
     return this.frequency;
-};
-Channel1.prototype.setLength = function(value) {
+  };
+  Channel1.prototype.setLength = function(value) {
     this.soundLength = 64 - (value & 0x3F);
-};
-Channel1.prototype.setEnvelopeVolume = function(volume) {
+  };
+  Channel1.prototype.setEnvelopeVolume = function(volume) {
     this.envelopeCheck = volume > 0 && volume < 16 ? true : false;
     this.envelopeVolume = volume;
     this.gainNode.gain.value = this.envelopeVolume * 1/100;
-};
-Channel1.prototype.disable = function() {
+  };
+  Channel1.prototype.disable = function() {
     this.oscillator.disconnect();
-};
-Channel1.prototype.enable = function() {
+  };
+  Channel1.prototype.enable = function() {
     this.oscillator.connect(this.gainNode);
-};
-GameboyJS.Channel1 = Channel1;
-}(GameboyJS || (GameboyJS = {})));
+  };
+  return Channel1;
+}

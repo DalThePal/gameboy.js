@@ -15,6 +15,10 @@ const { ROM }             = require('./rom/rom.js');
 const { FileReader }      = require('./rom/file_reader.js');
 const { Screen }          = require('./display/screen.js');
 const { GPU }             = require('./display/gpu.js');
+const { APU }             = require('./sound/Apu');
+const Channel4            = require('./sound/channel4');
+const Channel3            = require('./sound/channel3');
+const Channel1            = require('./sound/channel1');
 
 var GameboyJS = {};
 
@@ -39,6 +43,10 @@ GameboyJS.ROM               = ROM(GameboyJS);
 GameboyJS.RomFileReader     = FileReader(GameboyJS);
 GameboyJS.Screen            = Screen(GameboyJS);
 GameboyJS.GPU               = GPU(GameboyJS);
+GameboyJS.APU               = APU(GameboyJS);
+GameboyJS.Channel4          = Channel4(GameboyJS);
+GameboyJS.channel3          = Channel3(GameboyJS);
+GameboyJS.Channel1          = Channel1(GameboyJS);
 
 console.log(GameboyJS)
 
