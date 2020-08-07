@@ -16,6 +16,8 @@ module.exports = function (GameboyJS) {
       self.loadFromFile(e.target.files[0]);
     });
 
+    console.log(el)
+    console.log(file)
     if (file) {
       self.loadFromFile(file);
     }
