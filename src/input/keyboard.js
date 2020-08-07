@@ -19,20 +19,16 @@ module.exports = function (GameboyJS) {
       self.manageRelease(e.keyCode);
     });
     document.addEventListener('touchstart', function(e) {
-      self.manageTouch(e.target.id);
-    })
+      self.managePress(e.target.id);
+    });
+    document.addEventListener('touchend', function(e) {
+      self.manageRelease(e.target.id);
+    });
   }
 
   Keyboard.prototype.managePress = function(keycode) {
     var key = this.translateKey(keycode);
     if (key) {
-      this.onPress(key);
-    }
-  };
-
-  Keyboard.prototype.manageTouch = function(elID) {
-    var key = this.translateKey(elID)
-    if (elID) {
       this.onPress(key);
     }
   };
@@ -60,6 +56,7 @@ module.exports = function (GameboyJS) {
       case 78: // N
         key = 'SELECT';
         break;
+      case 'left':
       case 37: // left
         key = 'LEFT';
         break;
@@ -67,9 +64,11 @@ module.exports = function (GameboyJS) {
       case 38: // up
         key = 'UP';
         break;
+      case 'right':
       case 39: // right
         key = 'RIGHT';
         break;
+      case 'down':
       case 40: // down
         key = 'DOWN';
         break;
