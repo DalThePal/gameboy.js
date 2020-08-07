@@ -41,3 +41,5 @@ GameboyJS.Screen            = Screen(GameboyJS);
 GameboyJS.GPU               = GPU(GameboyJS);
 
 console.log(GameboyJS)
+
+export default GameboyJS;
