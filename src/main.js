@@ -45,7 +45,7 @@ GameboyJS.Screen            = Screen(GameboyJS);
 GameboyJS.GPU               = GPU(GameboyJS);
 GameboyJS.APU               = APU(GameboyJS);
 GameboyJS.Channel4          = Channel4(GameboyJS);
-GameboyJS.channel3          = Channel3(GameboyJS);
+GameboyJS.Channel3          = Channel3(GameboyJS);
 GameboyJS.Channel1          = Channel1(GameboyJS);
 
 console.log(GameboyJS)
