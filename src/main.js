@@ -32,7 +32,6 @@ let opcodemaps        = opcodes(GameboyJS);
 
 GameboyJS.opcodeCbmap = opcodemaps.opcodeCbmap;
 GameboyJS.opcodemap   = opcodemaps.opcodeMap;
-GameboyJS.Gameboy     = Gameboy(GameboyJS);
 GameboyJS.CPU         = CPU(GameboyJS);
 GameboyJS.Memory      = Memory(GameboyJS);
 GameboyJS.Exception   = Exception(GameboyJS);
@@ -53,6 +52,7 @@ GameboyJS.Channel1          = Channel1(GameboyJS);
 GameboyJS.Keyboard          = Keyboard(GameboyJS);
 GameboyJS.Input             = Input(GameboyJS);
 GameboyJS.Gamepad           = Gamepad(GameboyJS);
+GameboyJS.Gameboy           = Gameboy(GameboyJS);
 
 console.log(GameboyJS)
 
