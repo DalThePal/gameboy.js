@@ -18,6 +18,7 @@ exports.ROM = function ROM (GameboyJS) {
         return;
       }
       self.data = data;
+      console.log(data)
       self.gameboy.startRom(self);
     });
   };

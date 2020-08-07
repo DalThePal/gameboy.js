@@ -41,6 +41,7 @@ exports.Memory = function Memory (GameboyJS) {
   };
 
   Memory.prototype.setRomData = function(data) {
+    console.log(data)
     this.rom = data;
     this.loadRomBank(0);
     this.mbc = GameboyJS.MBC.getMbcInstance(this, this[0x147]);
