@@ -121,3 +121,5 @@ Gameboy.prototype.handleException = function(e) {
 };
 GameboyJS.Gameboy = Gameboy;
 }(GameboyJS || (GameboyJS = {})));
+
+export default GameboyJS;
