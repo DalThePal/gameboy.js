@@ -45,7 +45,7 @@ exports.Gameboy = function Gameboy (GameboyJS) {
     var rom = new GameboyJS.Rom(this);
     if (readers.length == 0) {
       // add the default rom reader
-      var romReader = new GameboyJS.RomFileReader({file=this.options.romFile});
+      var romReader = new GameboyJS.RomFileReader(this.options.romInput, this.options.romFile);
       rom.addReader(romReader);
     } else {
       for (var i in readers) {
