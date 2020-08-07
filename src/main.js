@@ -19,6 +19,9 @@ const { APU }             = require('./sound/apu.js');
 const Channel4            = require('./sound/channel4');
 const Channel3            = require('./sound/channel3');
 const Channel1            = require('./sound/channel1');
+const Keyboard            = require('./input/keyboard');
+const Input               = require('./input/input');
+const Gamepad             = require('./input/gamepad');
 
 var GameboyJS = {};
 
@@ -47,6 +50,9 @@ GameboyJS.APU               = APU(GameboyJS);
 GameboyJS.Channel4          = Channel4(GameboyJS);
 GameboyJS.Channel3          = Channel3(GameboyJS);
 GameboyJS.Channel1          = Channel1(GameboyJS);
+GameboyJS.Keyboard          = Keyboard(GameboyJS);
+GameboyJS.Input             = Input(GameboyJS);
+GameboyJS.Gamepad           = Gamepad(GameboyJS);
 
 console.log(GameboyJS)
 
