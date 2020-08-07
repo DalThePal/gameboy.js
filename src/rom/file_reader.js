@@ -39,6 +39,8 @@ module.exports = function (GameboyJS) {
     var cb = this.callback;
 
     fr.onload = function() {
+      console.log(cb)
+      console.log(fr.result)
       cb && cb(new Uint8Array(fr.result));
     };
     fr.onerror = function(e) {
