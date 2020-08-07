@@ -1,4 +1,4 @@
-exports.FileReader = function FileReader (GameboyJS) {
+module.exports = function (GameboyJS) {
   "use strict";
 
   // A RomFileReader is able to load a local file from an input element
