@@ -1,15 +1,14 @@
-var GameboyJS;
-(function (GameboyJS) {
-"use strict";
+exports.ext_ram = function ext_ram (GameboyJS) {
+  "use strict";
 
-// Object for mapping the cartridge RAM
-var ExtRam = function() {
+  // Object for mapping the cartridge RAM
+  var ExtRam = function() {
     this.extRam = null;
     this.ramSize = 0;
     this.ramBank = 0;
-};
+  };
 
-ExtRam.prototype.loadRam = function(game, size) {
+  ExtRam.prototype.loadRam = function(game, size) {
     this.gameName = game;
 
     this.ramSize = size;
@@ -18,33 +17,33 @@ ExtRam.prototype.loadRam = function(game, size) {
     var key = this.getStorageKey();
     var data = localStorage.getItem(key);
     if (data == null) {
-        this.extRam = Array.apply(null, new Array(this.ramSize)).map(function(){return 0;});
+      this.extRam = Array.apply(null, new Array(this.ramSize)).map(function(){return 0;});
     } else {
-        this.extRam = JSON.parse(data);
-        if (this.extRam.length != size) {
-            console.error('Found RAM data but not matching expected size.');
-        }
+      this.extRam = JSON.parse(data);
+      if (this.extRam.length != size) {
+        console.error('Found RAM data but not matching expected size.');
+      }
     }
-};
+  };
 
-ExtRam.prototype.setRamBank = function(bank) {
+  ExtRam.prototype.setRamBank = function(bank) {
     this.ramBank = bank;
-};
+  };
 
-ExtRam.prototype.manageWrite = function(offset, value) {
+  ExtRam.prototype.manageWrite = function(offset, value) {
     this.extRam[this.ramBank * 8192 + offset] = value;
-};
+  };
 
-ExtRam.prototype.manageRead = function(offset) {
+  ExtRam.prototype.manageRead = function(offset) {
     return this.extRam[this.ramBank * 8192 + offset];
-};
+  };
 
-ExtRam.prototype.getStorageKey = function() {
+  ExtRam.prototype.getStorageKey = function() {
     return this.gameName + '_EXTRAM';;
-};
-// Actually save the RAM in the physical storage (localStorage)
-ExtRam.prototype.saveRamData = function() {
+  };
+  // Actually save the RAM in the physical storage (localStorage)
+  ExtRam.prototype.saveRamData = function() {
     localStorage.setItem(this.getStorageKey(), JSON.stringify(this.extRam));
-};
-GameboyJS.ExtRam = ExtRam;
-}(GameboyJS || (GameboyJS = {})));
+  };
+  return ExtRam;
+}
