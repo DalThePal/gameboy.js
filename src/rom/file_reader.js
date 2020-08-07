@@ -15,12 +15,6 @@ module.exports = function (GameboyJS) {
     this.domElement.addEventListener('change', function(e){
       self.loadFromFile(e.target.files[0]);
     });
-
-    console.log(el)
-    
-    if (file) {
-      self.loadFromFile(file);
-    }
   };
 
   // The callback argument will be called when a file is successfully
